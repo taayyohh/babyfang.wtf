@@ -22,48 +22,32 @@ const Nav = () => {
 
   return (
     <>
-      <div className="fixed z-10 hidden h-16 w-full items-center justify-between bg-[#F9F9F9] p-4 sm:flex">
-        <input
-          className="focus:shadow-outline h-8 w-36 rounded bg-[#f9f9f9] px-4 placeholder:text-slate-500 focus:outline-none"
-          placeholder="Search"
-        />
-
-        <button className="w-24 absolute left-1/2 -m-12">
+      <div className="fixed z-30 hidden h-16 w-full items-center justify-end  p-4 sm:flex">
+        <button className="absolute top-5 left-6 z-30 w-16">
           <Link href={"/"}>
-            <img src="/lucidhaus.png" alt={'LucidHaus Logo'} />
+            <img src="https://arweave.net/S5HTVWZkumbfr9tPPPRQCEwQLVUFYmmB30u1PvnAq3E" alt={"babyfang Logo"} />
           </Link>
         </button>
-        {isCatalogueArtist(signerAddress, root) && (
-          <div className={"absolute right-[220px]"}>
-            <Link href={"/mint"}>Mint</Link>
-          </div>
-        )}
-
         <div id="connect">
           <ConnectButton showBalance={true} label={"Connect"} accountStatus={"address"} />
         </div>
       </div>
-      <div className="fixed z-10 flex h-16 w-full items-center justify-between  border-b bg-white p-4 sm:hidden">
-        <button className="w-24">
+      <div className="fixed z-30 flex h-16 w-full items-center justify-between p-4 sm:hidden">
+        <button className="w-16">
           <Link href={"/"}>
-            <img src="/lucidhaus.png" />
+            <img src="https://arweave.net/S5HTVWZkumbfr9tPPPRQCEwQLVUFYmmB30u1PvnAq3E" alt={"babyfang Logo"} />
           </Link>
         </button>
         <div className={"ml-4"} onClick={() => setIsOpen(flag => !flag)}>
-          <HamburgerMenuIcon width={"24px"} height={"24px"} />
+          <HamburgerMenuIcon width={"24px"} height={"24px"} color={"#fff"} />
         </div>
 
         <motion.div
           variants={variants}
-          className={`absolute left-0 top-16 flex flex w-full w-full flex-col items-center overflow-hidden bg-[#F1F1F1]`}
+          className={`absolute right-0 top-16 flex flex w-full w-full flex-col items-center overflow-hidden text-white w-[90%] left-[5%]`}
           initial={"initial"}
           animate={isOpen ? "animate" : "initial"}
         >
-          {isCatalogueArtist(signerAddress, root) && (
-            <div className={""}>
-              <Link href={"/mint"}>Mint</Link>
-            </div>
-          )}
           <div id="connect">
             <ConnectButton showBalance={true} label={"Connect"} chainStatus={"none"} accountStatus={"address"} />
           </div>

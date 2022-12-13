@@ -90,7 +90,7 @@ const AuctionControls: React.FC<any> = ({ release }) => {
       <motion.div
         variants={toggleVariants}
         animate={isOpen ? "animate" : "initial"}
-        className={"absolute top-1 right-1 cursor-pointer rounded bg-gray-900 p-2 shadow-xl"}
+        className={"absolute top-1 right-1 cursor-pointer rounded  p-2 shadow-xl"}
         onClick={() => setIsOpen(bool => !bool)}
       >
         <BsThreeDotsVertical size={20} color={"#fff"} />
@@ -99,7 +99,7 @@ const AuctionControls: React.FC<any> = ({ release }) => {
         initial={"initial"}
         variants={dropdownVariants}
         animate={isOpen ? "animate" : "initial"}
-        className={"absolute top-1 left-5 top-9 box-border h-0 w-10/12 overflow-hidden rounded bg-[#f9f9f9] shadow-2xl"}
+        className={"absolute top-1 left-5 top-9 box-border h-0 w-10/12 overflow-hidden rounded  shadow-2xl"}
       >
         <div className={"mb-2  text-xl  text-gray-500"}>Auction Controls</div>
         {!auction?.notForAuction ? (

@@ -1,14 +1,20 @@
 import React from "react"
-import { usePlayerStore } from "stores/usePlayerStore"
-import { BsArrowDown, BsFillPlayCircleFill, BsPauseCircleFill, BsPlayCircle } from "react-icons/bs"
+import { BsArrowDown } from "react-icons/bs"
 import { AnimatePresence, motion } from "framer-motion"
-import Album from "components/Album/Album"
-import { slugify } from "utils/helpers"
-import { SWRConfig } from "swr"
-import Link from "next/link"
+import useSWR, { SWRConfig } from "swr"
 import { getDiscography } from "utils/getDiscographyNullMetadata"
-import Meta from "../components/Layout/Meta"
 import Image from "next/image"
+import { useContract } from "wagmi"
+import dropABI from "ABI/Drop.json"
+import { ethers } from "ethers"
+import { useLayoutStore } from "stores/useLayoutStore"
+import { collectionQuery } from "../query/Collection"
+import ZoraTag from "../components/Shared/ZoraTag"
+import AnimatedModal from "../components/Modal/Modal"
+import { ETHERSCAN_BASE_URL } from "../constants/etherscan"
+import axios from "axios"
+import Meta from "components/Layout/Meta"
+import { usePlayerStore } from "../stores/usePlayerStore"
 
 export async function getServerSideProps() {
   try {
@@ -29,127 +35,184 @@ export async function getServerSideProps() {
 }
 
 const Catalogue: React.FC<any> = ({ discography }) => {
-  const { addToQueue, queuedMusic, queue, currentPosition, media, isPlaying, currentTime, duration, setIsPlaying } =
-    usePlayerStore((state: any) => state)
+  const { signer } = useLayoutStore()
+  const { addToQueue, queuedMusic } = usePlayerStore((state: any) => state)
 
-  /*  generate random song  */
-  const random = React.useMemo(() => {
-    const random = (max: []) => Math.floor(Math.random() * max.length)
-    const release = discography[random(discography)]
-    return {
-      artist: release?.metadata?.artist,
-      image: release?.metadata?.project?.artwork.uri.replace("ipfs://", "https://ipfs.io/ipfs/"),
-      songs: [
-        {
-          audio: [release?.metadata?.losslessAudio.replace("ipfs://", "https://ipfs.io/ipfs/")],
-          title: release?.metadata?.title,
-          trackNumber: release?.metadata?.trackNumber,
-        },
-      ],
+  const contract = useContract({
+    address: "0x0a7a9b0f77099f99fb6f566c069fbe28c49da714",
+    abi: dropABI,
+    signerOrProvider: signer,
+  })
+
+  const { data: contractInfo } = useSWR(contract ? "total-supply" : null, async () => {
+    if (contract === null) return
+
+    console.log("C", contract)
+
+    const totalSupply = Number(await contract.totalSupply())
+    const address = await contract?.address
+    const uri = await contract?.contractURI()
+    const info = await axios(uri.replace("ipfs://", "https://ipfs.io/ipfs/"))
+
+    return { totalSupply, address, info: info.data }
+  })
+
+  const { data: originStory, mutate } = useSWR("origin-story", async () => {
+    return await collectionQuery()
+  })
+
+  const handleMint = React.useCallback(async () => {
+    if (!signer) {
+      //todo prompt connect
+
+      return
     }
-  }, [discography])
+
+    const { wait } = await contract?.purchase(1, { value: ethers.utils.parseEther(".001") })
+    await wait()
+    mutate()
+    console.log("purchased")
+  }, [signer, contract])
 
   React.useEffect(() => {
-    if (!random) return
-
-    addToQueue([random])
-  }, [random])
+    addToQueue([
+      {
+        artist: "babyfang",
+        image: "https://arweave.net/K3wTV9-T_PW7UcqF4YyhVAR6jFBYbn0mjI5tQxbsLyI",
+        songs: [
+          {
+            audio: ["https://arweave.net/F70tN_fooDq1b0_IfedlHcaPGj8D0MABA_BXIMLj7wI"],
+            title: "desrever",
+            trackNumber: "0",
+          },
+        ],
+      },
+    ])
+    // https://arweave.net/F70tN_fooDq1b0_IfedlHcaPGj8D0MABA_BXIMLj7wI
+  }, [])
 
   return (
     <div className="absolute top-0 left-0 m-0 mx-auto box-border h-full w-screen min-w-0">
       <Meta
-        title={random?.songs[0]?.title}
+        title={"Babyfang"}
         type={"music.song"}
-        image={random?.image.replace("ipfs://", "https://ipfs.io/ipfs/")}
+        image="https://arweave.net/K3wTV9-T_PW7UcqF4YyhVAR6jFBYbn0mjI5tQxbsLyI"
         slug={"/"}
-        track={random?.songs[0].trackNumber}
-        musician={random?.artist}
-        description={"LucidHaus Catalogue <3"}
+        musician={"babyfang"}
+        description={'babyfang announces ‘Goan Go’, ur fav new rock song <3"'}
       />
       <div className="m-0 mx-auto box-border w-screen min-w-0">
         <div className="sticky top-0 z-0 grid h-screen w-screen place-items-center ">
           <div className="absolute -z-10 flex w-full max-w-screen-xl justify-center">
-            {queue && (
-              <AnimatePresence exitBeforeEnter={true}>
-                <motion.div
-                  className="relative flex flex-col items-center md:flex-row"
-                  key={queue[currentPosition]?.audio}
-                  variants={{
-                    closed: {
-                      y: 10,
-                      opacity: 0,
-                    },
-                    open: {
-                      y: 0,
-                      opacity: 1,
-                    },
-                  }}
-                  initial="closed"
-                  animate="open"
-                  exit="closed"
-                >
-                  <button
-                    type="button"
-                    className={`sm-h-32 w-h-32 relative h-72 w-72 overflow-hidden rounded-full border sm:h-96 sm:min-h-[330px] sm:w-96 sm:min-w-[330px]`}
-                    onClick={() => {
-                      isPlaying ? media.pause() : media.play()
-                    }}
-                  >
-                    {queue[currentPosition]?.image && (
-                      <Image
-                        className={`h-full w-full ${isPlaying ? "animate-spin-slow" : ""}`}
-                        src={queue[currentPosition]?.image}
-                        layout='fill'
-                        // layout={'fill'}
-                      />
-                    )}
-
-                    <div className="absolute top-[50%] left-[50%] -mt-[24px] -ml-[24px]">
-                      {(isPlaying && <BsPauseCircleFill size={48} />) || <BsFillPlayCircleFill size={48} />}
-                    </div>
-                  </button>
-                  <div className="mt-4 flex max-w-[320px] flex-col gap-2 sm:max-w-[400px] md:ml-8 md:mt-0 md:gap-4 md:pl-8">
-                    <div className="text-3xl font-bold sm:text-4xl md:text-5xl">
-                      {!!queue[currentPosition]?.artist && !!queue[currentPosition]?.title && (
-                        <Link
-                          href={`${slugify(queue[currentPosition]?.artist)}/${slugify(queue[currentPosition]?.title)}`}
-                        >
-                          {queue[currentPosition]?.title}
-                        </Link>
-                      )}
-                    </div>
-                    {!!queue[currentPosition]?.artist && (
-                      <div className="text-3xl text-[#081C15] sm:text-4xl md:text-5xl">
-                        <Link href={`${slugify(queue[currentPosition]?.artist)}`}>
-                          {queue[currentPosition]?.artist}
-                        </Link>
-                      </div>
-                    )}
-                    {currentTime.length > 0 && duration.length > 0 && (
-                      <div className="text-xl">
-                        {currentTime} / {duration}
-                      </div>
-                    )}
-                    {/*<Countdown countdownString={countdownString} />*/}
+            <AnimatePresence exitBeforeEnter={true}>
+              <motion.div
+                className="relative flex flex-col items-center gap-12 md:flex-row"
+                key={"key"}
+                variants={{
+                  closed: {
+                    y: 10,
+                    opacity: 0,
+                  },
+                  open: {
+                    y: 0,
+                    opacity: 1,
+                  },
+                }}
+                initial="closed"
+                animate="open"
+                exit="closed"
+              >
+                <div className="mt-4 flex max-w-[320px] flex-col gap-2 pt-12 text-white sm:max-w-[400px] md:ml-8 md:mt-0 md:gap-4 md:pl-8">
+                  <div className="text-3xl font-bold sm:text-4xl md:text-5xl">
+                    babyfang announces <em>&lsquo;Goan Go&rsquo;</em>, ur fav new rock song {"<3"}
                   </div>
-                </motion.div>
-              </AnimatePresence>
-            )}
+                  <div className="text-3xl text-rose-700 sm:text-4xl md:text-5xl">out Fri, Dec 20</div>
+                  <AnimatedModal
+                    trigger={
+                      <button className="flex items-center justify-center rounded-xl border py-3 text-xl hover:bg-white hover:text-black">
+                        Mint Day Brièrre Cover Art
+                      </button>
+                    }
+                  >
+                    <div>Explain mint</div>
+                  </AnimatedModal>
+                </div>
+                <div
+                  className={`sm-h-32 w-h-32 relative h-72 w-72 overflow-hidden sm:h-96 sm:min-h-[330px] sm:w-96 sm:min-w-[330px]`}
+                >
+                  <Image
+                    className={`h-full w-full`}
+                    src="https://arweave.net/K3wTV9-T_PW7UcqF4YyhVAR6jFBYbn0mjI5tQxbsLyI"
+                    layout="fill"
+                    // layout={'fill'}
+                  />
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
           <div className="fixed bottom-5 animate-bounce">
-            <BsArrowDown size={24} />
+            <BsArrowDown size={24} color={"#fff"} />
           </div>
         </div>
-        <div className="relative mx-auto flex w-full flex-col bg-[#F9F9F9]">
-          {discography?.length > 0 ? (
-            <div className="mx-auto w-11/12 border-t">
-              <div className="grid grid-cols-2 gap-8 py-8 md:grid-cols-3 lg:grid-cols-4">
-                {discography?.map((release: any, i: any) => (
-                  <Album key={i} release={release} />
-                ))}
+
+        <div className={"relative z-20 bg-black pb-20"}>
+          <div className={"mx-auto max-w-3xl px-4 text-white"}>
+            <div className={"text-8xl font-bold sm:text-9xl"}>
+              babyfang <em>&lsquo;origin story&rsquo;</em> collection
+            </div>
+            <div className={"py-9"}>
+              We present to you a collection of 1000 different photos documenting the moments, as friends and as a band,
+              that have led us here -- the eve of our debut album; releasing February 3, 2023 via{" "}
+              <a href={"https://lucid.haus"} className={"text-rose-600 hover:text-rose-700"} target={"_blank"}>
+                LucidHaus
+              </a>
+              . <span className={"text-lg font-bold"}>Mint</span> one for .01 ETH.
+            </div>
+            <div className={"mb-12 rounded border p-6"}>
+              <div className={"flex flex-col"}>
+                <div className={"relative mx-auto h-auto w-full overflow-hidden rounded-3xl"}>
+                  {/*//TODO MAKE GIF*/}
+                  <img
+                    src={contractInfo?.info?.image.replace("ipfs://", "https://ipfs.io/ipfs/")}
+                    // className={"w-full"}
+                  />
+                </div>
+                <div className={"text-4xl font-bold"}>{contractInfo?.info?.name}</div>
+                <div className={"mb-2 text-lg"}>{contractInfo?.info?.description}</div>
+                <div>
+                  Contract:{" "}
+                  <a href={`${ETHERSCAN_BASE_URL}/address/${contractInfo?.address}`}>{contractInfo?.address}</a>
+                </div>
+                <div>Minted: {contractInfo?.totalSupply}</div>
+
+                <div>Seller Fee Recipient: {contractInfo?.info?.seller_fee_recipient}</div>
               </div>
             </div>
-          ) : null}
+          </div>
+
+          <div className={" mx-auto flex w-full flex-wrap justify-center gap-1"}>
+            <button
+              onClick={() => handleMint()}
+              className={"h-[32vw] w-[32vw] bg-sky-400 object-cover sm:h-[14vw] sm:w-[14vw]"}
+            >
+              Mint to reveal
+            </button>
+            {originStory &&
+              originStory?.map((mint: { token: { metadata: { image: string } } }) => (
+                <>
+                  <div
+                    className={
+                      "flex h-[32vw] w-[32vw] items-center justify-center bg-[#0000] object-cover sm:h-[14vw] sm:w-[14vw]"
+                    }
+                  >
+                    <img src={mint?.token?.metadata.image.replace("ipfs://", "https://ipfs.io/ipfs/")} />
+                  </div>
+                </>
+              ))}
+          </div>
+          <div className={"pr-5"}>
+            <ZoraTag link={"https://docs.zora.co/docs/smart-contracts/creator-tools/ERC721Drop"} />
+          </div>
         </div>
       </div>
     </div>

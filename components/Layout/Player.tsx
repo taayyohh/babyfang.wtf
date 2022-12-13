@@ -177,7 +177,6 @@ const Player = () => {
   }, [media])
 
   const handlePlay = async () => {
-    console.log("m", media)
     media.play()
   }
 
@@ -201,53 +200,69 @@ const Player = () => {
     // setIsPlaying(true)
   }
 
+  React.useEffect(() => {
+    console.log("Q", queue, media)
+    if (queue.length > 0 && !!media) {
+      let playAttempt = setInterval(() => {
+        media
+          .play()
+          .then(() => {
+            clearInterval(playAttempt)
+          })
+          .catch((error: any) => {
+            console.log("Unable to play the video, User has not interacted yet.", error)
+          })
+      }, 3000)
+    }
+  }, [queue, media])
+
   return (
-    <div className="fixed bottom-2 flex flex w-full items-center justify-between px-4">
+    <div className="fixed bottom-2 z-40 flex flex w-full items-center justify-between px-4">
       <div className="flex items-center gap-4 ">
         <div>
-          <div className="inline-flex h-10 items-center gap-2 self-start rounded border bg-white p-2 shadow">
-            <button type="button" onClick={queue.length > 0 ? () => handlePrev() : () => {}}>
-              <BiSkipPrevious size={28} />
-            </button>
+          <div className="inline-flex h-10 items-center gap-2 self-start rounded border bg-black p-2 shadow">
+            {/*<button type="button" onClick={queue.length > 0 ? () => handlePrev() : () => {}}>*/}
+            {/*  <BiSkipPrevious size={28} />*/}
+            {/*</button>*/}
             {(isPlaying && (
               <button type="button" onClick={queue.length > 0 ? () => handlePause() : () => {}}>
-                <BsFillPauseFill size={22} />
+                <BsFillPauseFill size={22} color={"#fff"} />
               </button>
             )) || (
               <button type="button" onClick={queue.length > 0 ? () => handlePlay() : () => {}}>
-                <BsFillPlayFill size={22} />
+                <BsFillPlayFill size={22} color={"#fff"} />
               </button>
             )}
 
-            <button type="button" onClick={queue.length > 0 ? () => handleNext() : () => {}}>
-              <BiSkipNext size={28} />
-            </button>
+            {/*<button type="button" onClick={queue.length > 0 ? () => handleNext() : () => {}}>*/}
+            {/*  <BiSkipNext size={28} />*/}
+            {/*</button>*/}
           </div>
           <audio crossOrigin="anonymous" preload={"auto"} src={queue[currentPosition]?.audio} ref={audioRef} />
         </div>
-        {media.currentSrc.length > 0 ? (
-          <div className="inline-flex h-10 items-center gap-2 self-start rounded border bg-white p-2 shadow">
-            <div>
-              <Link href={`/${slugify(queue[currentPosition]?.artist)}/${slugify(queue[currentPosition]?.title)}`}>
-                {queue[currentPosition]?.title}
-              </Link>
-            </div>
-            <div className="text-[#081C15]">
-              {" "}
-              <Link href={`/${slugify(queue[currentPosition]?.artist)}`}>{queue[currentPosition]?.artist}</Link>
-            </div>
-          </div>
-        ) : null}
+        {/*{media.currentSrc.length > 0 ? (*/}
+        {/*  <div className="inline-flex h-10 items-center gap-2 self-start rounded border bg-white p-2 shadow">*/}
+        {/*    <div>*/}
+        {/*      <Link href={`/${slugify(queue[currentPosition]?.artist)}/${slugify(queue[currentPosition]?.title)}`}>*/}
+        {/*        {queue[currentPosition]?.title}*/}
+        {/*      </Link>*/}
+        {/*    </div>*/}
+        {/*    <div className="text-[#081C15]">*/}
+        {/*      {" "}*/}
+        {/*      <Link href={`/${slugify(queue[currentPosition]?.artist)}`}>{queue[currentPosition]?.artist}</Link>*/}
+        {/*    </div>*/}
+        {/*  </div>*/}
+        {/*) : null}*/}
       </div>
 
       <div className="hidden items-center gap-4 sm:visible sm:flex ">
-        {currentTime && duration && (
-          <div>
-            <div className="inline-flex h-10 items-center gap-2 self-start rounded border bg-white p-2 shadow">
-              {currentTime} / {duration}
-            </div>
-          </div>
-        )}
+        {/*{currentTime && duration && (*/}
+        {/*  <div>*/}
+        {/*    <div className="inline-flex h-10 items-center gap-2 self-start rounded border bg-white p-2 shadow">*/}
+        {/*      {currentTime} / {duration}*/}
+        {/*    </div>*/}
+        {/*  </div>*/}
+        {/*)}*/}
       </div>
     </div>
   )

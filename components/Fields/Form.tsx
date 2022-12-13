@@ -229,7 +229,7 @@ const Form: React.FC<FormProps> = ({
                 )) || (
                   //TODO:: if its a formHandler form (i.e navigating between sections, we can abstract these "prev" and "next" buttons
                   <button
-                    className={`cursor-pointer bg-gray-800 text-white hover:bg-gray-900 ${defaultFormButton}`}
+                    className={`cursor-pointer bg-gray-800 text-white hover: ${defaultFormButton}`}
                     type={!isSubForm ? "submit" : "button"}
                     onClick={isSubForm ? () => handleSubmit(formik.values, formik.initialValues) : undefined}
                     disabled={!isEmpty(formik.errors)}
