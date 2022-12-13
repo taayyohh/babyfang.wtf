@@ -1,11 +1,16 @@
 import React from "react"
 import { ethers } from "ethers"
 import { useLayoutStore } from "../../stores/useLayoutStore"
-import { useContract } from "wagmi"
+import { useAccount, useContract, useNetwork } from "wagmi"
 import { ORIGIN_STORY_DROP } from "../../constants/addresses"
 import dropABI from "../../ABI/Drop.json"
+import { useChainModal, useConnectModal } from "@rainbow-me/rainbowkit"
 
 const ReservedMint = () => {
+  const { address } = useAccount()
+  const { chain } = useNetwork()
+  const { openConnectModal } = useConnectModal()
+  const { openChainModal } = useChainModal()
   const { signer, provider } = useLayoutStore()
   const contract = useContract({
     address: "0xe44540c653558070d4acc0a4dc75de883f5e9df4",
@@ -36,7 +41,7 @@ const ReservedMint = () => {
         </div>
         <button
           className="mt-4 flex w-full items-center justify-center rounded-xl border bg-black py-3 text-xl text-white hover:bg-white hover:text-black"
-          onClick={() => handleMint()}
+          onClick={address === null ? openConnectModal : chain?.unsupported ? openChainModal : handleMint}
         >
           Mint .01 ETH
         </button>

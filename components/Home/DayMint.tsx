@@ -1,11 +1,14 @@
 import React from "react"
-import { ethers } from "ethers"
-import { useLayoutStore } from "../../stores/useLayoutStore"
-import { useContract } from "wagmi"
-import { ORIGIN_STORY_DROP } from "../../constants/addresses"
-import dropABI from "../../ABI/Drop.json"
+import { useLayoutStore } from "stores/useLayoutStore"
+import { useAccount, useContract, useNetwork } from "wagmi"
+import dropABI from "ABI/Drop.json"
+import { useChainModal, useConnectModal } from "@rainbow-me/rainbowkit"
 
 const DayMint = () => {
+  const { address } = useAccount()
+  const { chain } = useNetwork()
+  const { openConnectModal } = useConnectModal()
+  const { openChainModal } = useChainModal()
   const { signer, provider } = useLayoutStore()
   const contract = useContract({
     address: "0x18dea78dd27cb57b94274cb20e9a46e286a21f65",
@@ -53,7 +56,7 @@ const DayMint = () => {
         </div>
         <button
           className="mt-4 flex w-full items-center justify-center rounded-xl border bg-black py-3 text-xl text-white hover:bg-white hover:text-black"
-          onClick={() => handleMint()}
+          onClick={address === null ? openConnectModal : chain?.unsupported ? openChainModal : handleMint}
         >
           Free Mint
         </button>

@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import useSWR, { SWRConfig } from "swr"
 import { getDiscography } from "utils/getDiscographyNullMetadata"
 import Image from "next/image"
-import { useContract } from "wagmi"
+import { useAccount, useContract, useNetwork } from "wagmi"
 import dropABI from "ABI/Drop.json"
 import { ethers } from "ethers"
 import { useLayoutStore } from "stores/useLayoutStore"
@@ -17,6 +17,7 @@ import Meta from "components/Layout/Meta"
 import { usePlayerStore } from "../stores/usePlayerStore"
 import { ORIGIN_STORY_DROP } from "../constants/addresses"
 import DayMint from "../components/Home/DayMint"
+import { useChainModal, useConnectModal } from "@rainbow-me/rainbowkit"
 
 export async function getServerSideProps() {
   try {
@@ -73,6 +74,11 @@ const Catalogue: React.FC<any> = ({ discography }) => {
     mutate()
     console.log("purchased")
   }, [signer, contract])
+
+  const { address } = useAccount()
+  const { chain } = useNetwork()
+  const { openConnectModal } = useConnectModal()
+  const { openChainModal } = useChainModal()
 
   React.useEffect(() => {
     addToQueue([
@@ -133,11 +139,11 @@ const Catalogue: React.FC<any> = ({ discography }) => {
                         Mint Day Brièrre Cover Art (Free)
                       </button>
                     }
-                    size={'auto'}
+                    size={"auto"}
                   >
                     <DayMint />
                   </AnimatedModal>
-                  <div className={"text-lg sm:text-md mt-4 flex justify-center underline sm:mt-0"}>
+                  <div className={"sm:text-md mt-4 flex justify-center text-lg underline sm:mt-0"}>
                     <a href={"https://distrokid.com/hyperfollow/babyfang/goan-go"} target="_blank">
                       Pre-save on Spotify or Apple Music
                     </a>
@@ -175,7 +181,8 @@ const Catalogue: React.FC<any> = ({ discography }) => {
             </div>
             <div className={"py-9 px-9"}>
               We present to you a collection of 420 different photos documenting the moments, as friends and as a band,
-              that have led us here -- the eve of our debut album. <span className={"text-lg font-bold"}>Mint</span> one for .01 ETH.
+              that have led us here -- the eve of our debut album. <span className={"text-lg font-bold"}>Mint</span> one
+              for .01 ETH.
             </div>
             {contractInfo && (
               <div className={"mb-12 rounded border p-6"}>
@@ -202,7 +209,10 @@ const Catalogue: React.FC<any> = ({ discography }) => {
           </div>
 
           <div className={" mx-auto flex w-full flex-wrap justify-center gap-1"}>
-            <button onClick={() => handleMint()} className={"h-[32vw] w-[32vw] object-cover sm:h-[14vw] sm:w-[14vw]"}>
+            <button
+              onClick={address === null ? openConnectModal : chain?.unsupported ? openChainModal : handleMint}
+              className={"h-[32vw] w-[32vw] object-cover sm:h-[14vw] sm:w-[14vw]"}
+            >
               <div className={"relative flex h-full w-full items-center justify-center overflow-hidden border"}>
                 <Image
                   objectFit={"cover"}
