@@ -241,22 +241,22 @@ const Player = () => {
           </div>
           <audio crossOrigin="anonymous" preload={"auto"} src={queue[currentPosition]?.audio} ref={audioRef} />
         </div>
-        {media.currentSrc.length > 0 ? (
-          <div className="inline-flex h-10 items-center gap-2 self-start rounded border bg-black p-2 text-white shadow">
-            <div>
-              <AnimatedModal trigger={<div>Mint</div>}>
-                <div>Mint</div>
-              </AnimatedModal>
-              {/*<Link href={`/${slugify(queue[currentPosition]?.artist)}/${slugify(queue[currentPosition]?.title)}`}>*/}
-              {/*  /!*{queue[currentPosition]?.title}*!/*/}
-              {/*</Link>*/}
-            </div>
-            {/*<div className="text-[#081C15]">*/}
-            {/*  {" "}*/}
-            {/*  <Link href={`/${slugify(queue[currentPosition]?.artist)}`}>{queue[currentPosition]?.artist}</Link>*/}
-            {/*</div>*/}
-          </div>
-        ) : null}
+        {/*{media.currentSrc.length > 0 ? (*/}
+        {/*  <div className="inline-flex h-10 items-center gap-2 self-start rounded border bg-black p-2 text-white shadow">*/}
+        {/*    <div>*/}
+        {/*      <AnimatedModal trigger={<div>Mint</div>}>*/}
+        {/*        <div>Mint</div>*/}
+        {/*      </AnimatedModal>*/}
+        {/*      /!*<Link href={`/${slugify(queue[currentPosition]?.artist)}/${slugify(queue[currentPosition]?.title)}`}>*!/*/}
+        {/*      /!*  /!*{queue[currentPosition]?.title}*!/*!/*/}
+        {/*      /!*</Link>*!/*/}
+        {/*    </div>*/}
+        {/*    /!*<div className="text-[#081C15]">*!/*/}
+        {/*    /!*  {" "}*!/*/}
+        {/*    /!*  <Link href={`/${slugify(queue[currentPosition]?.artist)}`}>{queue[currentPosition]?.artist}</Link>*!/*/}
+        {/*    /!*</div>*!/*/}
+        {/*  </div>*/}
+        {/*) : null}*/}
       </div>
 
       <div className="hidden items-center gap-4 sm:visible sm:flex ">

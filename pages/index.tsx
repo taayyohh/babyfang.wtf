@@ -16,6 +16,7 @@ import axios from "axios"
 import Meta from "components/Layout/Meta"
 import { usePlayerStore } from "../stores/usePlayerStore"
 import { ORIGIN_STORY_DROP } from "../constants/addresses"
+import DayMint from "../components/Home/DayMint"
 
 export async function getServerSideProps() {
   try {
@@ -129,11 +130,11 @@ const Catalogue: React.FC<any> = ({ discography }) => {
                   <AnimatedModal
                     trigger={
                       <button className="flex items-center justify-center rounded-xl border py-3 text-xl hover:bg-white hover:text-black">
-                        Mint Day Brièrre Cover Art
+                        Mint Day Brièrre Cover Art (Free)
                       </button>
                     }
                   >
-                    <div>Explain mint</div>
+                    <DayMint />
                   </AnimatedModal>
                   <div className={"mt-4 flex justify-center underline sm:mt-0"}>
                     <a href={"https://distrokid.com/hyperfollow/babyfang/goan-go"} target="_blank">
