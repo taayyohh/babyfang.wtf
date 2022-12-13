@@ -77,7 +77,7 @@ const AnimatedModal: React.FC<AnimatedModalProps> = ({ children, open, close, si
                 onClick={e => e.stopPropagation()}
               >
                 <div
-                  className={`mx-auto flex flex-col ${
+                  className={`mx-auto flex flex-col z-50 ${
                     animatedModalContent[
                       size === "small" ? "small" : size === "large" ? "large" : size === "auto" ? "auto" : "small"
                     ]

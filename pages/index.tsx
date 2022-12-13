@@ -35,13 +35,13 @@ export async function getServerSideProps() {
 }
 
 const Catalogue: React.FC<any> = ({ discography }) => {
-  const { signer } = useLayoutStore()
+  const { signer, provider } = useLayoutStore()
   const { addToQueue, queuedMusic } = usePlayerStore((state: any) => state)
 
   const contract = useContract({
     address: "0x0a7a9b0f77099f99fb6f566c069fbe28c49da714",
     abi: dropABI,
-    signerOrProvider: signer,
+    signerOrProvider: signer ?? provider,
   })
 
   const { data: contractInfo } = useSWR(contract ? "total-supply" : null, async () => {
@@ -168,26 +168,28 @@ const Catalogue: React.FC<any> = ({ discography }) => {
               </a>
               . <span className={"text-lg font-bold"}>Mint</span> one for .01 ETH.
             </div>
-            <div className={"mb-12 rounded border p-6"}>
-              <div className={"flex flex-col"}>
-                <div className={"relative mx-auto h-auto w-full overflow-hidden rounded-3xl"}>
-                  {/*//TODO MAKE GIF*/}
-                  <img
-                    src={contractInfo?.info?.image.replace("ipfs://", "https://ipfs.io/ipfs/")}
-                    // className={"w-full"}
-                  />
-                </div>
-                <div className={"text-4xl font-bold"}>{contractInfo?.info?.name}</div>
-                <div className={"mb-2 text-lg"}>{contractInfo?.info?.description}</div>
-                <div>
-                  Contract:{" "}
-                  <a href={`${ETHERSCAN_BASE_URL}/address/${contractInfo?.address}`}>{contractInfo?.address}</a>
-                </div>
-                <div>Minted: {contractInfo?.totalSupply}</div>
+            {contractInfo && (
+              <div className={"mb-12 rounded border p-6"}>
+                <div className={"flex flex-col"}>
+                  <div className={"relative mx-auto h-auto w-full overflow-hidden rounded-3xl"}>
+                    {/*//TODO MAKE GIF*/}
+                    <img
+                      src={contractInfo?.info?.image.replace("ipfs://", "https://ipfs.io/ipfs/")}
+                      // className={"w-full"}
+                    />
+                  </div>
+                  <div className={"text-4xl font-bold"}>{contractInfo?.info?.name}</div>
+                  <div className={"mb-2 text-lg"}>{contractInfo?.info?.description}</div>
+                  <div>
+                    Contract:{" "}
+                    <a href={`${ETHERSCAN_BASE_URL}/address/${contractInfo?.address}`}>{contractInfo?.address}</a>
+                  </div>
+                  <div>Minted: {contractInfo?.totalSupply}</div>
 
-                <div>Seller Fee Recipient: {contractInfo?.info?.seller_fee_recipient}</div>
+                  <div>Seller Fee Recipient: {contractInfo?.info?.seller_fee_recipient}</div>
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           <div className={" mx-auto flex w-full flex-wrap justify-center gap-1"}>

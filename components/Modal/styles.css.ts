@@ -7,7 +7,7 @@ export const animatedModal = style({
   top: 0,
   left: 0,
   width: "100vw",
-  zIndex: "10",
+  zIndex: "70",
 })
 
 export const animatedModalTrigger = style({
