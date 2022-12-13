@@ -1,15 +1,10 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit"
 import React from "react"
 import Link from "next/link"
-import { useLayoutStore } from "stores/useLayoutStore"
 import { motion } from "framer-motion"
 import { HamburgerMenuIcon } from "@radix-ui/react-icons"
-import { isCatalogueArtist } from "utils/isCatalogueArtist"
-import useSWR from "swr"
 
 const Nav = () => {
-  const { signerAddress } = useLayoutStore()
-  const { data: root } = useSWR("merkleRoot")
   const [isOpen, setIsOpen] = React.useState<boolean>(false)
   const variants = {
     initial: {
