@@ -137,6 +137,11 @@ const Catalogue: React.FC<any> = ({ discography }) => {
                   >
                     <div>Explain mint</div>
                   </AnimatedModal>
+                  <div className={"mt-4 flex justify-center underline sm:mt-0"}>
+                    <a href={"https://distrokid.com/hyperfollow/babyfang/goan-go"} target="_blank">
+                      Pre-save on Spotify or Apple Music
+                    </a>
+                  </div>
                 </div>
                 <div className={"flex flex-col"}>
                   <div
@@ -205,11 +210,11 @@ const Catalogue: React.FC<any> = ({ discography }) => {
               <button onClick={() => handleMint()} className={"h-[32vw] w-[32vw] object-cover sm:h-[14vw] sm:w-[14vw]"}>
                 <div className={"relative flex h-full w-full items-center justify-center overflow-hidden border"}>
                   <Image
-                      objectFit={"cover"}
-                      sizes="(max-width: 768px) 32vw, 14vw"
-                      layout={"fill"}
-                      src={"https://arweave.net/U8IpqldK67bXrYqrons1hem3pt9yEVKWQw2K96DEvrU"}
-                      className={"absolute top-0 left-0 h-full w-full blur"}
+                    objectFit={"cover"}
+                    sizes="(max-width: 768px) 32vw, 14vw"
+                    layout={"fill"}
+                    src={"https://arweave.net/U8IpqldK67bXrYqrons1hem3pt9yEVKWQw2K96DEvrU"}
+                    className={"absolute top-0 left-0 h-full w-full blur"}
                   />
                   <div className={"absolute text-white"}>Mint to collect</div>
                 </div>
