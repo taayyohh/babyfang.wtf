@@ -133,6 +133,7 @@ const Catalogue: React.FC<any> = ({ discography }) => {
                         Mint Day Brièrre Cover Art (Free)
                       </button>
                     }
+                    size={'auto'}
                   >
                     <DayMint />
                   </AnimatedModal>
