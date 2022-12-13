@@ -48,8 +48,6 @@ const Catalogue: React.FC<any> = ({ discography }) => {
   const { data: contractInfo } = useSWR(contract ? "total-supply" : null, async () => {
     if (contract === null) return
 
-    console.log("C", contract)
-
     const totalSupply = Number(await contract.totalSupply())
     const address = await contract?.address
     const uri = await contract?.contractURI()
@@ -69,7 +67,7 @@ const Catalogue: React.FC<any> = ({ discography }) => {
       return
     }
 
-    const { wait } = await contract?.purchase(420, { value: ethers.utils.parseEther((0.01 * 420).toString()) }) //todo: make this not hard coded
+    const { wait } = await contract?.purchase(1, { value: ethers.utils.parseEther((0.01).toString()) }) //todo: make this not hard coded
     await wait()
     mutate()
     console.log("purchased")
@@ -206,20 +204,19 @@ const Catalogue: React.FC<any> = ({ discography }) => {
           </div>
 
           <div className={" mx-auto flex w-full flex-wrap justify-center gap-1"}>
-            {contractInfo?.totalSupply && contractInfo?.totalSupply < 421 && (
-              <button onClick={() => handleMint()} className={"h-[32vw] w-[32vw] object-cover sm:h-[14vw] sm:w-[14vw]"}>
-                <div className={"relative flex h-full w-full items-center justify-center overflow-hidden border"}>
-                  <Image
-                    objectFit={"cover"}
-                    sizes="(max-width: 768px) 32vw, 14vw"
-                    layout={"fill"}
-                    src={"https://arweave.net/U8IpqldK67bXrYqrons1hem3pt9yEVKWQw2K96DEvrU"}
-                    className={"absolute top-0 left-0 h-full w-full blur"}
-                  />
-                  <div className={"absolute text-white"}>Mint to collect</div>
-                </div>
-              </button>
-            )}
+            <button onClick={() => handleMint()} className={"h-[32vw] w-[32vw] object-cover sm:h-[14vw] sm:w-[14vw]"}>
+              <div className={"relative flex h-full w-full items-center justify-center overflow-hidden border"}>
+                <Image
+                  objectFit={"cover"}
+                  sizes="(max-width: 768px) 32vw, 14vw"
+                  layout={"fill"}
+                  src={"https://arweave.net/U8IpqldK67bXrYqrons1hem3pt9yEVKWQw2K96DEvrU"}
+                  className={"absolute top-0 left-0 h-full w-full blur"}
+                />
+                <div className={"absolute text-white"}>Mint to collect</div>
+              </div>
+            </button>
+
             {originStory &&
               originStory?.map((mint: { token: { metadata: { image: string } } }) => (
                 <>
