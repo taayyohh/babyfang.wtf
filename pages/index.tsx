@@ -95,7 +95,7 @@ const Catalogue: React.FC<any> = ({ discography }) => {
   return (
     <div className="absolute top-0 left-0 m-0 mx-auto box-border h-full w-screen min-w-0">
       <Meta
-        title={"Babyfang"}
+        title={"Goan out Dec 20"}
         type={"music.song"}
         image="https://arweave.net/K3wTV9-T_PW7UcqF4YyhVAR6jFBYbn0mjI5tQxbsLyI"
         slug={"/"}
@@ -201,25 +201,37 @@ const Catalogue: React.FC<any> = ({ discography }) => {
           </div>
 
           <div className={" mx-auto flex w-full flex-wrap justify-center gap-1"}>
-            <button onClick={() => handleMint()} className={"h-[32vw] w-[32vw] object-cover sm:h-[14vw] sm:w-[14vw]"}>
-              <div className={"relative flex h-full w-full items-center justify-center overflow-hidden border"}>
-                <img
-                  src={"https://arweave.net/U8IpqldK67bXrYqrons1hem3pt9yEVKWQw2K96DEvrU"}
-                  className={"absolute top-0 left-0 h-full w-full blur"}
-                />
-                <div className={"absolute text-white"}>Mint to collect</div>
-              </div>
-            </button>
+            {contractInfo?.totalSupply && contractInfo?.totalSupply < 421 && (
+              <button onClick={() => handleMint()} className={"h-[32vw] w-[32vw] object-cover sm:h-[14vw] sm:w-[14vw]"}>
+                <div className={"relative flex h-full w-full items-center justify-center overflow-hidden border"}>
+                  <Image
+                      objectFit={"cover"}
+                      sizes="(max-width: 768px) 32vw, 14vw"
+                      layout={"fill"}
+                      src={"https://arweave.net/U8IpqldK67bXrYqrons1hem3pt9yEVKWQw2K96DEvrU"}
+                      className={"absolute top-0 left-0 h-full w-full blur"}
+                  />
+                  <div className={"absolute text-white"}>Mint to collect</div>
+                </div>
+              </button>
+            )}
             {originStory &&
               originStory?.map((mint: { token: { metadata: { image: string } } }) => (
                 <>
-                  <div
-                    className={
-                      "flex h-[32vw] w-[32vw] items-center justify-center overflow-hidden bg-[#0000] object-cover sm:h-[14vw] sm:w-[14vw]"
-                    }
-                  >
-                    <img src={mint?.token?.metadata?.image?.replace("ipfs://", "https://ipfs.io/ipfs/")} />
-                  </div>
+                  {mint?.token?.metadata?.image && (
+                    <div
+                      className={
+                        "relative flex h-[32vw] w-[32vw] items-center justify-center overflow-hidden bg-[#0000] object-cover sm:h-[14vw] sm:w-[14vw]"
+                      }
+                    >
+                      <Image
+                        objectFit={"cover"}
+                        sizes="(max-width: 768px) 32vw, 14vw"
+                        layout={"fill"}
+                        src={mint?.token?.metadata?.image?.replace("ipfs://", "https://ipfs.io/ipfs/")}
+                      />
+                    </div>
+                  )}
                 </>
               ))}
           </div>

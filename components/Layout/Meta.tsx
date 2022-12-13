@@ -16,7 +16,7 @@ interface MetaProps {
 const Meta: React.FC<MetaProps> = ({ title, type, slug, image, description, duration, album, track, musician }) => {
   return (
     <Head>
-      <title>LucidHaus | {title}</title>
+      <title>Babyfang | {title}</title>
       <meta property="og:title" content={title} />
       <meta property="og:type" content={type} />
       <meta property="og:url" content={`https://lucid.haus${slug}`} />
