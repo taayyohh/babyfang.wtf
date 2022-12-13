@@ -18,6 +18,8 @@ import { usePlayerStore } from "../stores/usePlayerStore"
 import { ORIGIN_STORY_DROP } from "../constants/addresses"
 import DayMint from "../components/Home/DayMint"
 import { useChainModal, useConnectModal } from "@rainbow-me/rainbowkit"
+import { useEnsData } from "../hooks/useEnsData"
+import CollectionInfo from "../components/Home/CollectionInfo"
 
 export async function getServerSideProps() {
   try {
@@ -47,16 +49,20 @@ const Catalogue: React.FC<any> = ({ discography }) => {
     signerOrProvider: signer ?? provider,
   })
 
-  const { data: contractInfo } = useSWR(contract ? "total-supply" : null, async () => {
-    if (contract === null) return
+  const { data: contractInfo } = useSWR(
+    contract ? "total-supply" : null,
+    async () => {
+      if (contract === null) return
 
-    const totalSupply = Number(await contract.totalSupply())
-    const address = await contract?.address
-    const uri = await contract?.contractURI()
-    const info = await axios(uri.replace("ipfs://", "https://ipfs.io/ipfs/"))
+      const totalSupply = Number(await contract.totalSupply())
+      const address = await contract?.address
+      const uri = await contract?.contractURI()
+      const info = await axios(uri.replace("ipfs://", "https://ipfs.io/ipfs/"))
 
-    return { totalSupply, address, info: info.data }
-  })
+      return { totalSupply, address, info: info.data }
+    },
+    { revalidateIfStale: true }
+  )
 
   const { data: originStory, mutate } = useSWR("origin-story", async () => {
     return await collectionQuery()
@@ -175,39 +181,7 @@ const Catalogue: React.FC<any> = ({ discography }) => {
         </div>
 
         <div className={"relative z-20 bg-black pb-20"}>
-          <div className={"mx-auto max-w-3xl px-4 text-white"}>
-            <div className={"text-8xl font-bold sm:text-9xl"}>
-              babyfang <em>&lsquo;origin story&rsquo;</em> collection
-            </div>
-            <div className={"py-9 px-9"}>
-              We present to you a collection of 420 different photos documenting the moments, as friends and as a band,
-              that have led us here -- the eve of our debut album. <span className={"text-lg font-bold"}>Mint</span> one
-              for .01 ETH.
-            </div>
-            {contractInfo && (
-              <div className={"mb-12 rounded border p-6"}>
-                <div className={"flex flex-col"}>
-                  <div className={"relative mx-auto h-auto w-full overflow-hidden rounded-3xl"}>
-                    {/*//TODO MAKE GIF*/}
-                    <img
-                      src={contractInfo?.info?.image.replace("ipfs://", "https://ipfs.io/ipfs/")}
-                      // className={"w-full"}
-                    />
-                  </div>
-                  <div className={"text-4xl font-bold"}>{contractInfo?.info?.name}</div>
-                  <div className={"mb-2 text-lg"}>{contractInfo?.info?.description}</div>
-                  <div>
-                    Contract:{" "}
-                    <a href={`${ETHERSCAN_BASE_URL}/address/${contractInfo?.address}`}>{contractInfo?.address}</a>
-                  </div>
-                  <div>Minted: {contractInfo?.totalSupply}</div>
-
-                  <div>Seller Fee Recipient: {contractInfo?.info?.seller_fee_recipient}</div>
-                </div>
-              </div>
-            )}
-          </div>
-
+          {contractInfo && <CollectionInfo contractInfo={contractInfo} />}
           <div className={" mx-auto flex w-full flex-wrap justify-center gap-1"}>
             <button
               onClick={address === null ? openConnectModal : chain?.unsupported ? openChainModal : handleMint}

@@ -29,11 +29,14 @@ const CopyButton = ({ title, text, all }: CopyButtonProps) => {
   return (
     <React.Fragment>
       {!copied ? (
-        <div className={"pointer border border-transparent bg-transparent"} onClick={() => handleCopy(text as string)}>
-          <CopyIcon color={"#B3B3B3"} />
+        <div
+          className={"cursor-pointer border border-transparent bg-transparent text-inherit"}
+          onClick={() => handleCopy(text as string)}
+        >
+          <CopyIcon color={"#B3B3B3"} className={'cursor-pointer'} />
         </div>
       ) : (
-        <div className={"pointer border border-transparent bg-transparent"}>
+        <div className={"cursor-pointer border border-transparent bg-transparent text-inherit"}>
           <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ duration: 0.2 }} exit={{ scale: 0 }}>
             <CheckCircledIcon color={"#00C853"} />
           </motion.div>
