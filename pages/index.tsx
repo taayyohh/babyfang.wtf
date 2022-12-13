@@ -15,6 +15,7 @@ import { ETHERSCAN_BASE_URL } from "../constants/etherscan"
 import axios from "axios"
 import Meta from "components/Layout/Meta"
 import { usePlayerStore } from "../stores/usePlayerStore"
+import { ORIGIN_STORY_DROP } from "../constants/addresses"
 
 export async function getServerSideProps() {
   try {
@@ -39,7 +40,7 @@ const Catalogue: React.FC<any> = ({ discography }) => {
   const { addToQueue, queuedMusic } = usePlayerStore((state: any) => state)
 
   const contract = useContract({
-    address: "0x0a7a9b0f77099f99fb6f566c069fbe28c49da714",
+    address: ORIGIN_STORY_DROP,
     abi: dropABI,
     signerOrProvider: signer ?? provider,
   })
@@ -68,7 +69,7 @@ const Catalogue: React.FC<any> = ({ discography }) => {
       return
     }
 
-    const { wait } = await contract?.purchase(1, { value: ethers.utils.parseEther(".001") })
+    const { wait } = await contract?.purchase(420, { value: ethers.utils.parseEther((0.01 * 420).toString()) }) //todo: make this not hard coded
     await wait()
     mutate()
     console.log("purchased")
@@ -137,15 +138,22 @@ const Catalogue: React.FC<any> = ({ discography }) => {
                     <div>Explain mint</div>
                   </AnimatedModal>
                 </div>
-                <div
-                  className={`sm-h-32 w-h-32 relative h-72 w-72 overflow-hidden sm:h-96 sm:min-h-[330px] sm:w-96 sm:min-w-[330px]`}
-                >
-                  <Image
-                    className={`h-full w-full`}
-                    src="https://arweave.net/K3wTV9-T_PW7UcqF4YyhVAR6jFBYbn0mjI5tQxbsLyI"
-                    layout="fill"
-                    // layout={'fill'}
-                  />
+                <div className={"flex flex-col"}>
+                  <div
+                    className={`sm-h-32 w-h-32 relative h-72 w-72 overflow-hidden sm:h-96 sm:min-h-[330px] sm:w-96 sm:min-w-[330px]`}
+                  >
+                    <Image
+                      className={`h-full w-full`}
+                      src="https://arweave.net/K3wTV9-T_PW7UcqF4YyhVAR6jFBYbn0mjI5tQxbsLyI"
+                      layout="fill"
+                      // layout={'fill'}
+                    />
+                  </div>
+                  <div className={"pt-2 text-xs text-white"}>
+                    <a href={"https://www.instagram.com/biomorphia/"} target={"_blank"}>
+                      Art by @biomorphia
+                    </a>
+                  </div>
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -160,8 +168,8 @@ const Catalogue: React.FC<any> = ({ discography }) => {
             <div className={"text-8xl font-bold sm:text-9xl"}>
               babyfang <em>&lsquo;origin story&rsquo;</em> collection
             </div>
-            <div className={"py-9"}>
-              We present to you a collection of 1000 different photos documenting the moments, as friends and as a band,
+            <div className={"py-9 px-9"}>
+              We present to you a collection of 420 different photos documenting the moments, as friends and as a band,
               that have led us here -- the eve of our debut album; releasing February 3, 2023 via{" "}
               <a href={"https://lucid.haus"} className={"text-rose-600 hover:text-rose-700"} target={"_blank"}>
                 LucidHaus
@@ -193,21 +201,25 @@ const Catalogue: React.FC<any> = ({ discography }) => {
           </div>
 
           <div className={" mx-auto flex w-full flex-wrap justify-center gap-1"}>
-            <button
-              onClick={() => handleMint()}
-              className={"h-[32vw] w-[32vw] bg-sky-400 object-cover sm:h-[14vw] sm:w-[14vw]"}
-            >
-              Mint to reveal
+            <button onClick={() => handleMint()} className={"h-[32vw] w-[32vw] object-cover sm:h-[14vw] sm:w-[14vw]"}>
+              <div className={"relative flex h-full w-full items-center justify-center overflow-hidden border"}>
+                <img
+                  src={"https://arweave.net/U8IpqldK67bXrYqrons1hem3pt9yEVKWQw2K96DEvrU"}
+                  className={"absolute top-0 left-0 h-full w-full blur"}
+                />
+                <div className={"absolute text-white"}>Mint to collect</div>
+              </div>
             </button>
             {originStory &&
               originStory?.map((mint: { token: { metadata: { image: string } } }) => (
                 <>
                   <div
                     className={
-                      "flex h-[32vw] w-[32vw] items-center justify-center bg-[#0000] object-cover sm:h-[14vw] sm:w-[14vw]"
+                      "flex h-[32vw] w-[32vw] items-center justify-center overflow-hidden bg-[#0000] object-cover sm:h-[14vw] sm:w-[14vw]"
                     }
                   >
-                    <img src={mint?.token?.metadata.image.replace("ipfs://", "https://ipfs.io/ipfs/")} />
+                    {console.log("t", mint.token)}
+                    <img src={mint?.token?.metadata?.image?.replace("ipfs://", "https://ipfs.io/ipfs/")} />
                   </div>
                 </>
               ))}

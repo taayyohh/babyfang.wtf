@@ -1,5 +1,5 @@
 import { gql, request } from "graphql-request"
-import { HAUS_CATALOGUE_PROXY } from "../constants/addresses"
+import { ORIGIN_STORY_DROP } from "../constants/addresses"
 import { CHAIN } from "../constants/network"
 
 export const tokenEventHistory = async (tokenId: string) => {
@@ -79,7 +79,7 @@ export const tokenEventHistory = async (tokenId: string) => {
   `
 
   const variables = {
-    address: HAUS_CATALOGUE_PROXY,
+    address: ORIGIN_STORY_DROP,
     tokenId,
     chain: CHAIN,
   }

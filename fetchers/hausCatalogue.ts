@@ -5,12 +5,12 @@ import ZORA_ADDRESSES from "@zoralabs/v3/dist/addresses/5.json"
 import { useLayoutStore } from "../stores/useLayoutStore"
 import { Provider } from "@ethersproject/providers"
 import { FetchSignerResult } from "@wagmi/core"
-import {HAUS_CATALOGUE_PROXY} from "constants/addresses";
+import {ORIGIN_STORY_DROP} from "constants/addresses";
 
 export async function init() {
   const { signer, provider } = useLayoutStore()
   const hausCatalogueContract = HausCatalogue__factory.connect(
-      HAUS_CATALOGUE_PROXY as string,
+      ORIGIN_STORY_DROP as string,
     (signer as FetchSignerResult) ?? (provider as Provider)
   )
 

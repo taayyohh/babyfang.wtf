@@ -6,7 +6,7 @@ import { BigNumberish, BytesLike, ethers, Signer } from "ethers"
 import { HausCatalogue } from "types/ethers-contracts"
 import { useLayoutStore } from "stores/useLayoutStore"
 import useSWR from "swr"
-import {HAUS_CATALOGUE_PROXY} from "constants/addresses";
+import {ORIGIN_STORY_DROP} from "constants/addresses";
 
 const useHausCatalogue = () => {
   const { signer, provider } = useLayoutStore()
@@ -15,7 +15,7 @@ const useHausCatalogue = () => {
   const hausCatalogueContract = React.useMemo(() => {
     if (!provider) return
 
-    return HausCatalogue__factory.connect(HAUS_CATALOGUE_PROXY as string, (signer as Signer) ?? provider)
+    return HausCatalogue__factory.connect(ORIGIN_STORY_DROP as string, (signer as Signer) ?? provider)
   }, [provider])
 
   /*
