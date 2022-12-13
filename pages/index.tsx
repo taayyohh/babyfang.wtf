@@ -96,7 +96,7 @@ const Catalogue: React.FC<any> = ({ discography }) => {
       <Meta
         title={"Goan out Dec 20"}
         type={"music.song"}
-        image="https://arweave.net/K3wTV9-T_PW7UcqF4YyhVAR6jFBYbn0mjI5tQxbsLyI"
+        image="https://ipfs.io/ipfs/bafybeigjjsuctwsmvaw32h3th5frh5ffjakroedkj2qsa7cj23fl7yt3lm"
         slug={"/"}
         musician={"babyfang"}
         description={'babyfang announces ‘Goan Go’, ur fav new rock song <3"'}
