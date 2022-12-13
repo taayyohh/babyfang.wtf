@@ -175,11 +175,7 @@ const Catalogue: React.FC<any> = ({ discography }) => {
             </div>
             <div className={"py-9 px-9"}>
               We present to you a collection of 420 different photos documenting the moments, as friends and as a band,
-              that have led us here -- the eve of our debut album; releasing February 3, 2023 via{" "}
-              <a href={"https://lucid.haus"} className={"text-rose-600 hover:text-rose-700"} target={"_blank"}>
-                LucidHaus
-              </a>
-              . <span className={"text-lg font-bold"}>Mint</span> one for .01 ETH.
+              that have led us here -- the eve of our debut album. <span className={"text-lg font-bold"}>Mint</span> one for .01 ETH.
             </div>
             {contractInfo && (
               <div className={"mb-12 rounded border p-6"}>
