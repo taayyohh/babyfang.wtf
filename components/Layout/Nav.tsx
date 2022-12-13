@@ -44,7 +44,7 @@ const Nav = () => {
 
         <motion.div
           variants={variants}
-          className={`absolute right-0 top-16 flex flex w-full w-full flex-col items-center overflow-hidden text-white w-[90%] left-[5%]`}
+          className={`absolute right-0 top-16 left-[5%] flex flex w-full w-full w-[90%] flex-col items-center overflow-hidden bg-black text-white`}
           initial={"initial"}
           animate={isOpen ? "animate" : "initial"}
         >
