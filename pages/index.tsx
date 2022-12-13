@@ -218,7 +218,6 @@ const Catalogue: React.FC<any> = ({ discography }) => {
                       "flex h-[32vw] w-[32vw] items-center justify-center overflow-hidden bg-[#0000] object-cover sm:h-[14vw] sm:w-[14vw]"
                     }
                   >
-                    {console.log("t", mint.token)}
                     <img src={mint?.token?.metadata?.image?.replace("ipfs://", "https://ipfs.io/ipfs/")} />
                   </div>
                 </>
