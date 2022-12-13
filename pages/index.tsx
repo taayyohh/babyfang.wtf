@@ -137,7 +137,7 @@ const Catalogue: React.FC<any> = ({ discography }) => {
                   >
                     <DayMint />
                   </AnimatedModal>
-                  <div className={"mt-4 flex justify-center underline sm:mt-0"}>
+                  <div className={"text-lg sm:text-md mt-4 flex justify-center underline sm:mt-0"}>
                     <a href={"https://distrokid.com/hyperfollow/babyfang/goan-go"} target="_blank">
                       Pre-save on Spotify or Apple Music
                     </a>

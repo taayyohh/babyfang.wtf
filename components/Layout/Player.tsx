@@ -1,9 +1,6 @@
 import React from "react"
 import { usePlayerStore } from "stores/usePlayerStore"
 import { BsFillPauseFill, BsFillPlayFill } from "react-icons/bs"
-import { BiSkipNext, BiSkipPrevious } from "react-icons/bi"
-import Link from "next/link"
-import { slugify } from "../../utils/helpers"
 import AnimatedModal from "../Modal/Modal"
 import ReservedMint from "../Home/ReversedMint"
 
@@ -72,7 +69,7 @@ const Player = () => {
       setQueue([...handleAddToQueue])
     }
   }, [handleAddToQueue])
-  //
+
   const loadMedia = React.useCallback(() => {
     const media: Media = audioRef.current || {
       readyState: 0,
@@ -96,87 +93,12 @@ const Player = () => {
     }
     setCurrentMedia(media)
   }, [])
-  //
-  //
-  //
+
+
   React.useEffect(() => {
     loadMedia()
   }, [queue, currentPosition])
 
-  const toHHMMSS = function (secs: string) {
-    let sec_num = parseInt(secs, 10) // don't forget the second param
-    let hours = Math.floor(sec_num / 3600)
-    let minutes = Math.floor((sec_num - hours * 3600) / 60) || ""
-    let seconds = sec_num - hours * 3600 - Number(minutes) * 60 || ""
-    if (minutes < 10) {
-      minutes = "0" + minutes
-    }
-    if (seconds < 10) {
-      seconds = "0" + seconds
-    }
-    return minutes + ":" + seconds
-  }
-  const mediaListener = React.useMemo(() => {
-    // console.log("ready state", media.readyState)
-    // console.log("duration", media.duration)
-    // console.log("current time", media.currentTime)
-    // console.log("currentSrc", media.currentSrc)
-    // console.log("buffered", media.buffered)
-    // console.log("control list", media.controlsList)
-    // console.log("ended", media.ended)
-    // console.log("error", media.error)
-    // console.log("network state", media.networkState)
-    // console.log("seekable", media.seekable)
-    // console.log("seeking", media.seeking)
-    // console.log("textTracks", media.textTracks)
-    // console.log("volume", media.volume)
-    // console.log("muted", media.muted)
-    // console.log("paused", media.paused)
-
-    media.addEventListener("progress", (event: any) => {
-      // console.log("progress", event)
-    })
-
-    media.addEventListener("play", (event: any) => {
-      console.log("play", event)
-      console.log("duration", media.duration)
-    })
-
-    media.addEventListener("pause", (event: any) => {
-      console.log("pause", event)
-      console.log("ended", media.ended)
-      console.log("hiiii")
-      setIsPlaying(false)
-
-      if (media.ended) {
-        console.log("queue", queue)
-        if (queue.length > 1) {
-          handleNext()
-        } else {
-          setIsPlaying(false)
-        }
-      }
-    })
-
-    media.addEventListener("playing", (event: any) => {
-      console.log("playing", event)
-      setIsPlaying(true)
-      setDuration(toHHMMSS(media.duration.toString()))
-
-      // if(audioRef.current.readyState) {
-      //   media.load()
-      // }
-    })
-    //
-
-    media.addEventListener("timeupdate", (event: any) => {
-      setCurrentTime(toHHMMSS(Math.floor(media.currentTime).toString()))
-
-      // if(audioRef.current.readyState) {
-      //   media.load()
-      // }
-    })
-  }, [media])
 
   const handlePlay = async () => {
     media.play()
@@ -203,7 +125,6 @@ const Player = () => {
   }
 
   React.useEffect(() => {
-    console.log("Q", queue, media)
     if (queue.length > 0 && !!media) {
       let playAttempt = setInterval(() => {
         media
@@ -245,7 +166,7 @@ const Player = () => {
         {media.currentSrc.length > 0 ? (
           <div className="inline-flex h-10 items-center gap-2 self-start rounded border bg-black p-2 text-white shadow">
             <div>
-              <AnimatedModal trigger={<div>Mint</div>} size={"auto"}>
+              <AnimatedModal trigger={<button className={"hover:underline"}>Mint</button>} size={"auto"}>
                 <ReservedMint />
               </AnimatedModal>
               {/*<Link href={`/${slugify(queue[currentPosition]?.artist)}/${slugify(queue[currentPosition]?.title)}`}>*/}

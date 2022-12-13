@@ -5,6 +5,7 @@ import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit"
 import { configureChains, createClient, WagmiConfig, defaultChains } from "wagmi"
 import { alchemyProvider } from "wagmi/providers/alchemy"
 import Layout from "components/Layout/Layout"
+import { Analytics } from "@vercel/analytics/react"
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { chains, provider } = configureChains(
@@ -29,6 +30,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Layout>
           <Component {...pageProps} />
         </Layout>
+        <Analytics />
       </RainbowKitProvider>
     </WagmiConfig>
   )
