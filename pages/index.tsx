@@ -138,7 +138,7 @@ const Catalogue: React.FC<any> = ({ discography }) => {
                   <div className="text-3xl font-bold sm:text-4xl md:text-5xl">
                     babyfang announces <em>&lsquo;Goan Go&rsquo;</em>, ur fav new rock song {"<3"}
                   </div>
-                  <div className="text-3xl text-rose-700 sm:text-4xl md:text-5xl">out Fri, Dec 20</div>
+                  <div className="text-3xl text-rose-700 sm:text-4xl md:text-5xl">out now!</div>
                   <AnimatedModal
                     trigger={
                       <button className="flex items-center justify-center rounded-xl border py-3 text-xl hover:bg-white hover:text-black">
@@ -149,9 +149,18 @@ const Catalogue: React.FC<any> = ({ discography }) => {
                   >
                     <DayMint />
                   </AnimatedModal>
-                  <div className={"sm:text-md mt-4 flex justify-center text-lg underline sm:mt-0"}>
-                    <a href={"https://distrokid.com/hyperfollow/babyfang/goan-go"} target="_blank">
-                      Pre-save on Spotify or Apple Music
+                  <div className={"sm:text-md mt-4 flex justify-center text-lg underline sm:mt-0 gap-2"}>
+                    <a href={"https://webabyfang.bandcamp.com/"} target="_blank">
+                      Bandcamp
+                    </a>
+                    <a href={"https://tidal.com/track/261781841"} target="_blank">
+                      Tidal
+                    </a>
+                    <a href={"https://music.apple.com/us/album/goan-go-single/1655603794"} target="_blank">
+                      Apple Music
+                    </a>
+                    <a href={"https://open.spotify.com/album/4UWvvZOOCzjc3XaVjT3sF1"} target="_blank">
+                      Spotify
                     </a>
                   </div>
                 </div>
