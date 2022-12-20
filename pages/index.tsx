@@ -150,7 +150,7 @@ const Catalogue: React.FC<any> = ({ discography }) => {
                     <DayMint />
                   </AnimatedModal>
                   <div className={"sm:text-md mt-4 flex justify-center gap-2 text-lg underline sm:mt-0"}>
-                    <a href={"https://webabyfang.bandcamp.com/"} target="_blank">
+                    <a href={"https://webabyfang.bandcamp.com/album/in-the-face-of"} target="_blank">
                       Bandcamp
                     </a>
                     <a href={"https://tidal.com/track/261781841"} target="_blank">
