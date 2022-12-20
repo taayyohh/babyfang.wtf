@@ -149,7 +149,7 @@ const Catalogue: React.FC<any> = ({ discography }) => {
                   >
                     <DayMint />
                   </AnimatedModal>
-                  <div className={"sm:text-md mt-4 flex justify-center text-lg underline sm:mt-0 gap-2"}>
+                  <div className={"sm:text-md mt-4 flex justify-center gap-2 text-lg underline sm:mt-0"}>
                     <a href={"https://webabyfang.bandcamp.com/"} target="_blank">
                       Bandcamp
                     </a>
@@ -168,12 +168,14 @@ const Catalogue: React.FC<any> = ({ discography }) => {
                   <div
                     className={`sm-h-32 w-h-32 relative h-72 w-72 overflow-hidden sm:h-96 sm:min-h-[330px] sm:w-96 sm:min-w-[330px]`}
                   >
-                    <Image
-                      className={`h-full w-full`}
-                      src="https://arweave.net/K3wTV9-T_PW7UcqF4YyhVAR6jFBYbn0mjI5tQxbsLyI"
-                      layout="fill"
-                      // layout={'fill'}
-                    />
+                    <a href={"https://www.lucid.haus/babyfang/goan-go"} target={'_blank'}>
+                      <Image
+                        className={`h-full w-full`}
+                        src="https://arweave.net/K3wTV9-T_PW7UcqF4YyhVAR6jFBYbn0mjI5tQxbsLyI"
+                        layout="fill"
+                        // layout={'fill'}
+                      />
+                    </a>
                   </div>
                   <div className={"pt-2 text-xs text-white"}>
                     <a href={"https://www.instagram.com/biomorphia/"} target={"_blank"}>
