@@ -20,6 +20,7 @@ import DayMint from "../components/Home/DayMint"
 import { useChainModal, useConnectModal } from "@rainbow-me/rainbowkit"
 import { useEnsData } from "../hooks/useEnsData"
 import CollectionInfo from "../components/Home/CollectionInfo"
+import Head from "next/head"
 
 export async function getServerSideProps() {
   try {
@@ -106,12 +107,12 @@ const Catalogue: React.FC<any> = ({ discography }) => {
   return (
     <div className="absolute top-0 left-0 m-0 mx-auto box-border h-full w-screen min-w-0">
       <Meta
-        title={"Goan out Dec 20"}
+        title={"babyfang - In The Face Of"}
         type={"music.song"}
         image="https://arweave.net/SG_sYITJ53BB1hN2JinC6eApC1PVQpW9dbp28EkvR3I"
         slug={"/"}
         musician={"babyfang"}
-        description={'babyfang announces ‘Goan Go’, ur fav new rock song <3"'}
+        description={'babyfang "Goan Go" Music Video out now!'}
       />
       <div className="m-0 mx-auto box-border w-screen min-w-0">
         <div className="sticky top-0 z-0 grid h-screen w-screen place-items-center ">
@@ -134,57 +135,60 @@ const Catalogue: React.FC<any> = ({ discography }) => {
                 animate="open"
                 exit="closed"
               >
-                <div className="mt-4 flex max-w-[320px] flex-col gap-2 pt-12 text-white sm:max-w-[400px] md:ml-8 md:mt-0 md:gap-4 md:pl-8">
-                  <div className="text-3xl font-bold sm:text-4xl md:text-5xl">
-                    babyfang announces <em>&lsquo;Goan Go&rsquo;</em>, ur fav new rock song {"<3"}
-                  </div>
-                  <div className="text-3xl text-rose-700 sm:text-4xl md:text-5xl">out now!</div>
-                  <AnimatedModal
-                    trigger={
-                      <button className="flex items-center justify-center rounded-xl border py-3 text-xl hover:bg-white hover:text-black">
-                        Mint Day Brièrre Cover Art (Free)
-                      </button>
-                    }
-                    size={"auto"}
-                  >
-                    <DayMint />
-                  </AnimatedModal>
-                  <div className={"sm:text-md mt-4 flex justify-center gap-2 text-lg underline sm:mt-0"}>
-                    <a href={"https://webabyfang.bandcamp.com/album/in-the-face-of"} target="_blank">
-                      Bandcamp
-                    </a>
-                    <a href={"https://tidal.com/track/261781841"} target="_blank">
-                      Tidal
-                    </a>
-                    <a href={"https://music.apple.com/us/album/goan-go-single/1655603794"} target="_blank">
-                      Apple Music
-                    </a>
-                    <a href={"https://open.spotify.com/album/4UWvvZOOCzjc3XaVjT3sF1"} target="_blank">
-                      Spotify
-                    </a>
-                  </div>
-                </div>
+                {/*<div className="mt-4 flex max-w-[320px] flex-col gap-2 pt-12 text-white sm:max-w-[400px] md:ml-8 md:mt-0 md:gap-4 md:pl-8">*/}
+                {/*  <div className="text-3xl font-bold sm:text-4xl md:text-5xl">*/}
+                {/*    babyfang releases <em>&lsquo;Goan Go&rsquo;</em>, ur fav new music video {"<3"}*/}
+                {/*  </div>*/}
+                {/*  <div className="text-3xl text-rose-700 sm:text-4xl md:text-5xl">out now!</div>*/}
+                {/*  <AnimatedModal*/}
+                {/*    trigger={*/}
+                {/*      <button className="flex items-center justify-center rounded-xl border py-3 text-xl hover:bg-white hover:text-black">*/}
+                {/*        Mint Day Brièrre Cover Art (Free)*/}
+                {/*      </button>*/}
+                {/*    }*/}
+                {/*    size={"auto"}*/}
+                {/*  >*/}
+                {/*    <DayMint />*/}
+                {/*  </AnimatedModal>*/}
+                {/*  <div className={"sm:text-md mt-4 flex justify-center gap-2 text-lg underline sm:mt-0"}>*/}
+                {/*    <a href={"https://webabyfang.bandcamp.com/album/in-the-face-of"} target="_blank">*/}
+                {/*      Bandcamp*/}
+                {/*    </a>*/}
+                {/*    <a href={"https://tidal.com/track/261781841"} target="_blank">*/}
+                {/*      Tidal*/}
+                {/*    </a>*/}
+                {/*    <a href={"https://music.apple.com/us/album/goan-go-single/1655603794"} target="_blank">*/}
+                {/*      Apple Music*/}
+                {/*    </a>*/}
+                {/*    <a href={"https://open.spotify.com/album/4UWvvZOOCzjc3XaVjT3sF1"} target="_blank">*/}
+                {/*      Spotify*/}
+                {/*    </a>*/}
+                {/*  </div>*/}
+                {/*</div>*/}
                 <div className={"flex flex-col"}>
                   <div
-                    className={`sm-h-32 w-h-32 relative h-72 w-72 overflow-hidden sm:h-96 sm:min-h-[330px] sm:w-96 sm:min-w-[330px]`}
+                    className={`sm-h-32 w-h-32 h-144 w-144 relative overflow-hidden sm:h-96 sm:min-h-[530px] sm:w-96 sm:min-w-[530px]`}
                   >
-                    <a href={"https://www.lucid.haus/babyfang/goan-go"} target={'_blank'}>
-                      <Image
-                        className={`h-full w-full`}
-                        src="https://arweave.net/K3wTV9-T_PW7UcqF4YyhVAR6jFBYbn0mjI5tQxbsLyI"
-                        layout="fill"
-                        // layout={'fill'}
-                      />
-                    </a>
+                    <iframe
+                      className={" h-[380px] sm:h-[500px]"}
+                      width="100%"
+                      height="500px"
+                      src="https://create.zora.co/editions/0x29565870c5527b993a722dd20d23a1c0c378d73a/frame?showDetails=false&theme=dark&showMedia=true&showCollectors=false&showMintingUI=true"
+                    ></iframe>
                   </div>
                   <div className={"pt-2 text-xs text-white"}>
-                    <a href={"https://www.instagram.com/biomorphia/"} target={"_blank"}>
-                      Art by @biomorphia
+                    <a href={"https://www.caityrenee.com/"} target={"_blank"}>
+                      directed by Caity Arthur
                     </a>
                   </div>
                 </div>
               </motion.div>
             </AnimatePresence>
+
+            {/*<script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.2/iframeResizer.min.js"*/}
+            {/*        integrity="sha512-dnvR4Aebv5bAtJxDunq3eE8puKAJrY9GBJYl9GC6lTOEC76s1dbDfJFcL9GyzpaDW4vlI/UjR8sKbc1j6Ynx6w=="*/}
+            {/*        crossOrigin="anonymous" referrerPolicy="no-referrer"></script>*/}
+            {/*<script>iFrameResize({log: false, heightCalculationMethod: 'taggedElement'}, '#embed')</script>*/}
           </div>
           <div className="fixed bottom-5 animate-bounce">
             <BsArrowDown size={24} color={"#fff"} />
