@@ -151,16 +151,16 @@ const Catalogue: React.FC<any> = ({ discography }) => {
                   {/*  <DayMint />*/}
                   {/*</AnimatedModal>*/}
                   <div className={"sm:text-md mt-4 flex justify-center gap-2 text-lg underline sm:mt-0"}>
-                    <a href={"https://webabyfang.bandcamp.com/"} target="_blank">
+                    <a href={"https://webabyfang.bandcamp.com/album/in-the-face-of?label=1183943989&tab=music"} target="_blank">
                       Bandcamp
                     </a>
-                    <a href={"https://tidal.com/track/261781841"} target="_blank">
+                    <a href={"https://tidal.com/album/273207658"} target="_blank">
                       Tidal
                     </a>
-                    <a href={"https://music.apple.com/us/album/goan-go-single/1655603794"} target="_blank">
+                    <a href={"https://music.apple.com/us/album/in-the-face-of/1667647307"} target="_blank">
                       Apple Music
                     </a>
-                    <a href={"https://open.spotify.com/album/4UWvvZOOCzjc3XaVjT3sF1"} target="_blank">
+                    <a href={"https://open.spotify.com/album/2yCoxxEOntKBrNFF6mixhc"} target="_blank">
                       Spotify
                     </a>
                   </div>
@@ -169,7 +169,7 @@ const Catalogue: React.FC<any> = ({ discography }) => {
                   <div
                     className={`sm-h-32 w-h-32 relative h-72 w-72 overflow-hidden sm:h-96 sm:min-h-[330px] sm:w-96 sm:min-w-[330px]`}
                   >
-                    <a href={"https://www.lucid.haus/babyfang/goan-go"} target={"_blank"}>
+                    <a href={"https://www.lucid.haus/babyfang/"} target={"_blank"}>
                       <Image
                         className={`h-full w-full`}
                         src="https://arweave.net/4tDopLmLLT0m1Y8nacBy3hfnyG8oOA-F6Pe1hHGmOr4"
