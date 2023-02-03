@@ -9,8 +9,8 @@ const CollectionInfo: React.FC<{ contractInfo: any }> = ({ contractInfo }) => {
   console.log("E", ensAvatar, displayName)
 
   return (
-    <div className={"mx-auto max-w-3xl px-4 text-white"}>
-      <div className={"text-8xl font-bold sm:text-9xl"}>
+    <div className={"mx-auto max-w-3xl px-4 text-white mt-24"}>
+      <div className={"text-5xl font-bold sm:text-7xl text-center"}>
         babyfang <em>&lsquo;origin story&rsquo;</em> collection
       </div>
       <div className={"py-9 px-9"}>

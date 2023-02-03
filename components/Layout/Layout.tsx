@@ -36,7 +36,6 @@ const Layout = ({ children }: Props) => {
     <div className="min-h-screen">
       <Nav />
       {children}
-      <Player />
     </div>
   )
 }

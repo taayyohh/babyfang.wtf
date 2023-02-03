@@ -107,12 +107,12 @@ const Catalogue: React.FC<any> = ({ discography }) => {
   return (
     <div className="absolute top-0 left-0 m-0 mx-auto box-border h-full w-screen min-w-0">
       <Meta
-        title={"babyfang - In The Face Of"}
+        title={"In The Face Of out now"}
         type={"music.song"}
-        image="https://arweave.net/SG_sYITJ53BB1hN2JinC6eApC1PVQpW9dbp28EkvR3I"
+        image="https://arweave.net/4tDopLmLLT0m1Y8nacBy3hfnyG8oOA-F6Pe1hHGmOr4"
         slug={"/"}
         musician={"babyfang"}
-        description={'babyfang "Goan Go" Music Video out now!'}
+        description={'babyfang releases ‘In The Face Of’, ur fav new rock album<3"'}
       />
       <div className="m-0 mx-auto box-border w-screen min-w-0">
         <div className="sticky top-0 z-0 grid h-screen w-screen place-items-center ">
@@ -135,60 +135,57 @@ const Catalogue: React.FC<any> = ({ discography }) => {
                 animate="open"
                 exit="closed"
               >
-                {/*<div className="mt-4 flex max-w-[320px] flex-col gap-2 pt-12 text-white sm:max-w-[400px] md:ml-8 md:mt-0 md:gap-4 md:pl-8">*/}
-                {/*  <div className="text-3xl font-bold sm:text-4xl md:text-5xl">*/}
-                {/*    babyfang releases <em>&lsquo;Goan Go&rsquo;</em>, ur fav new music video {"<3"}*/}
-                {/*  </div>*/}
-                {/*  <div className="text-3xl text-rose-700 sm:text-4xl md:text-5xl">out now!</div>*/}
-                {/*  <AnimatedModal*/}
-                {/*    trigger={*/}
-                {/*      <button className="flex items-center justify-center rounded-xl border py-3 text-xl hover:bg-white hover:text-black">*/}
-                {/*        Mint Day Brièrre Cover Art (Free)*/}
-                {/*      </button>*/}
-                {/*    }*/}
-                {/*    size={"auto"}*/}
-                {/*  >*/}
-                {/*    <DayMint />*/}
-                {/*  </AnimatedModal>*/}
-                {/*  <div className={"sm:text-md mt-4 flex justify-center gap-2 text-lg underline sm:mt-0"}>*/}
-                {/*    <a href={"https://webabyfang.bandcamp.com/album/in-the-face-of"} target="_blank">*/}
-                {/*      Bandcamp*/}
-                {/*    </a>*/}
-                {/*    <a href={"https://tidal.com/track/261781841"} target="_blank">*/}
-                {/*      Tidal*/}
-                {/*    </a>*/}
-                {/*    <a href={"https://music.apple.com/us/album/goan-go-single/1655603794"} target="_blank">*/}
-                {/*      Apple Music*/}
-                {/*    </a>*/}
-                {/*    <a href={"https://open.spotify.com/album/4UWvvZOOCzjc3XaVjT3sF1"} target="_blank">*/}
-                {/*      Spotify*/}
-                {/*    </a>*/}
-                {/*  </div>*/}
-                {/*</div>*/}
+                <div className="mt-4 flex max-w-[320px] flex-col gap-2 pt-12 text-white sm:max-w-[400px] md:ml-8 md:mt-0 md:gap-4 md:pl-8">
+                  <div className="text-3xl font-bold sm:text-4xl md:text-5xl">
+                    <em>&lsquo;In The Face Of&rsquo;</em>, our debut album
+                  </div>
+                  <div className="text-3xl text-rose-700 sm:text-4xl md:text-5xl">out now!</div>
+                  {/*<AnimatedModal*/}
+                  {/*  trigger={*/}
+                  {/*    <button className="flex items-center justify-center rounded-xl border py-3 text-xl hover:bg-white hover:text-black">*/}
+                  {/*      Mint Day Brièrre Cover Art (Free)*/}
+                  {/*    </button>*/}
+                  {/*  }*/}
+                  {/*  size={"auto"}*/}
+                  {/*>*/}
+                  {/*  <DayMint />*/}
+                  {/*</AnimatedModal>*/}
+                  <div className={"sm:text-md mt-4 flex justify-center gap-2 text-lg underline sm:mt-0"}>
+                    <a href={"https://webabyfang.bandcamp.com/"} target="_blank">
+                      Bandcamp
+                    </a>
+                    <a href={"https://tidal.com/track/261781841"} target="_blank">
+                      Tidal
+                    </a>
+                    <a href={"https://music.apple.com/us/album/goan-go-single/1655603794"} target="_blank">
+                      Apple Music
+                    </a>
+                    <a href={"https://open.spotify.com/album/4UWvvZOOCzjc3XaVjT3sF1"} target="_blank">
+                      Spotify
+                    </a>
+                  </div>
+                </div>
                 <div className={"flex flex-col"}>
                   <div
-                    className={`sm-h-32 w-h-32 h-144 w-144 relative overflow-hidden sm:h-96 sm:min-h-[530px] sm:w-96 sm:min-w-[530px]`}
+                    className={`sm-h-32 w-h-32 relative h-72 w-72 overflow-hidden sm:h-96 sm:min-h-[330px] sm:w-96 sm:min-w-[330px]`}
                   >
-                    <iframe
-                      className={" h-[380px] sm:h-[500px]"}
-                      width="100%"
-                      height="500px"
-                      src="https://create.zora.co/editions/0x29565870c5527b993a722dd20d23a1c0c378d73a/frame?showDetails=false&theme=dark&showMedia=true&showCollectors=false&showMintingUI=true"
-                    ></iframe>
+                    <a href={"https://www.lucid.haus/babyfang/goan-go"} target={"_blank"}>
+                      <Image
+                        className={`h-full w-full`}
+                        src="https://arweave.net/4tDopLmLLT0m1Y8nacBy3hfnyG8oOA-F6Pe1hHGmOr4"
+                        layout="fill"
+                        // layout={'fill'}
+                      />
+                    </a>
                   </div>
                   <div className={"pt-2 text-xs text-white"}>
-                    <a href={"https://www.caityrenee.com/"} target={"_blank"}>
-                      directed by Caity Arthur
+                    <a href={"https://www.instagram.com/biomorphia/"} target={"_blank"}>
+                      Art by @biomorphia
                     </a>
                   </div>
                 </div>
               </motion.div>
             </AnimatePresence>
-
-            {/*<script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.2/iframeResizer.min.js"*/}
-            {/*        integrity="sha512-dnvR4Aebv5bAtJxDunq3eE8puKAJrY9GBJYl9GC6lTOEC76s1dbDfJFcL9GyzpaDW4vlI/UjR8sKbc1j6Ynx6w=="*/}
-            {/*        crossOrigin="anonymous" referrerPolicy="no-referrer"></script>*/}
-            {/*<script>iFrameResize({log: false, heightCalculationMethod: 'taggedElement'}, '#embed')</script>*/}
           </div>
           <div className="fixed bottom-5 animate-bounce">
             <BsArrowDown size={24} color={"#fff"} />
@@ -196,6 +193,25 @@ const Catalogue: React.FC<any> = ({ discography }) => {
         </div>
 
         <div className={"relative z-20 bg-black pb-20"}>
+          <div className={"mx-auto max-w-3xl px-4 text-white"}>
+            <div className={"py-4 pt-8 text-center text-5xl font-bold sm:text-7xl"}>
+              babyfang Release Party @ Market Hotel
+            </div>
+            <div className={"py-4 pt-8 text-center text-2xl text-red-500 sm:text-4xl"}>
+              Thurs, Feb 9 <br /> Doors @ 7p
+            </div>
+
+            <div className={"my-8 mx-auto flex w-full items-center justify-center sm:w-[600px]"}>
+              <img src={"https://arweave.net/vmxE8nXHvwk5FaqZzyOe1NPQmzo7s86vpqy4Or-q5xg"} />
+            </div>
+            <a
+              href={"https://www.seetickets.us/event/babyfang/527584"}
+              target={"_blank"}
+              className={"mx-auto flex w-1/2 items-center justify-center bg-rose-500 py-2 px-4 text-2xl text-white"}
+            >
+              Tickets
+            </a>
+          </div>
           {contractInfo && <CollectionInfo contractInfo={contractInfo} />}
           <div className={" mx-auto flex w-full flex-wrap justify-center gap-1"}>
             <button
@@ -233,10 +249,29 @@ const Catalogue: React.FC<any> = ({ discography }) => {
                   )}
                 </>
               ))}
+
+            <div className={"mt-32 flex items-center justify-center"}>
+              <iframe
+                id="embed"
+                width="500px"
+                height="400px"
+                className="w-full sm:w-[500px]"
+                src="https://create.zora.co/editions/0x29565870c5527b993a722dd20d23a1c0c378d73a/frame?padding=20px&mediaPadding=20px&showDetails=false&theme=dark&showMedia=true&showCollectors=false&showMintingUI=true"
+              />
+            </div>
           </div>
-          <div className={"pr-5"}>
-            <ZoraTag link={"https://docs.zora.co/docs/smart-contracts/creator-tools/ERC721Drop"} />
+          <div className={"mt-32 flex items-center justify-center"}>
+            <iframe
+              id="embed"
+              width="500px"
+              height="400px"
+              className="w-full sm:w-[500px]"
+              src="https://create.zora.co/editions/0xc6e06d747e1b9131d70e7b76df2c34b6cc35ab0c/frame?padding=20px&mediaPadding=20px&showDetails=false&theme=dark&showMedia=true&showCollectors=false&showMintingUI=true"
+            />
           </div>
+        </div>
+        <div className={"pr-5"}>
+          <ZoraTag link={"https://docs.zora.co/docs/smart-contracts/creator-tools/ERC721Drop"} />
         </div>
       </div>
     </div>
