@@ -193,25 +193,6 @@ const Catalogue: React.FC<any> = ({ discography }) => {
         </div>
 
         <div className={"relative z-20 bg-black pb-20"}>
-          <div className={"mx-auto max-w-3xl px-4 text-white"}>
-            <div className={"py-4 pt-8 text-center text-5xl font-bold sm:text-7xl"}>
-              babyfang Release Party @ Market Hotel
-            </div>
-            <div className={"py-4 pt-8 text-center text-2xl text-red-500 sm:text-4xl"}>
-              Thurs, Feb 9 <br /> Doors @ 7p
-            </div>
-
-            <div className={"my-8 mx-auto flex w-full items-center justify-center sm:w-[600px]"}>
-              <img src={"https://arweave.net/vmxE8nXHvwk5FaqZzyOe1NPQmzo7s86vpqy4Or-q5xg"} />
-            </div>
-            <a
-              href={"https://www.seetickets.us/event/babyfang/527584"}
-              target={"_blank"}
-              className={"mx-auto flex w-1/2 items-center justify-center bg-rose-500 py-2 px-4 text-2xl text-white"}
-            >
-              Tickets
-            </a>
-          </div>
           {contractInfo && <CollectionInfo contractInfo={contractInfo} />}
           <div className={" mx-auto flex w-full flex-wrap justify-center gap-1"}>
             <button
